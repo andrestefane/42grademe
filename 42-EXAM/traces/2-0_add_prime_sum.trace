@@ -1,0 +1,6 @@
+----------------8<-------------[ START TEST 
+        💻 TEST
+./a.out "Too" "Many" "Arguments" 
+        🔎 YOUR OUTPUT:
+   ❌ TIMEOUT
+----------------8<------------- END TEST ]
