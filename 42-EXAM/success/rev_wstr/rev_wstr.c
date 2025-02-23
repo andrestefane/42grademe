@@ -1,45 +1,70 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rev_wstr.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: astefane <astefane@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/03 17:46:17 by astefane          #+#    #+#             */
+/*   Updated: 2025/02/03 17:56:46 by astefane         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
-#include <stdlib.h>
 
-int     ft_strlen(char *str)
+void	ft_putchar(char c)
 {
-    int i;
-
-    i = 0;
-    while (str[i])
-        i++;
-    return (i);
+	write(1, &c, 1);
 }
 
-void rev_wstr(char *str)
+unsigned int	ft_strlen(char *str)
 {
-    int len = ft_strlen(str);
-    int i = len - 1;
-    int end, start;
+	int	i;
 
-    while (i >= 0)
-    {
-        while (i >= 0 && (str[i] == ' ' || str[i] == '\t'))
-            i--;
-        end = i;
-        while (i >= 0 && str[i] != ' ' && str[i] != '\t')
-            i--;
-        start = i + 1;
-        if (end >= 0)
-        {
-            write(1, &str[start], end - start + 1);
-            if (i > 0)
-                write(1, " ", 1);
-        }
-    }
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }
 
-int main(int argc, char **argv)
+void	rev_str(char *str)
 {
-   if (argc == 2)
-    {
-        rev_wstr(argv[1]);
-    }
-    write(1, "\n", 1);
-    return (0);
+	int		len;
+	char	*temp;
+	char	*rev;
+
+	temp = str;
+	rev = NULL;
+	len = ft_strlen(temp);
+	len--;
+	while (temp[len])
+	{
+		if (temp[len - 1] == ' ')
+		{
+			rev = &temp[len];
+			while (*rev && *rev != ' ')
+			{
+				ft_putchar(*rev);
+				rev++;
+			}
+			ft_putchar(' ');
+		}
+		else if (len == 0)
+		{
+			rev = &temp[len];
+			while (*rev && *rev != ' ')
+			{
+				ft_putchar(*rev);
+				rev++;
+			}
+			}
+			len--;
+	}
+}
+
+int	main(int argc, char **argv)
+{
+	if (argc == 2)
+		rev_str(argv[1]);
+	write(1, "\n", 1);
 }

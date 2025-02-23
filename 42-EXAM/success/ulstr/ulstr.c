@@ -1,24 +1,42 @@
-#include <unistd.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ulstr.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: astefane <astefane@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/19 15:46:29 by astefane          #+#    #+#             */
+/*   Updated: 2025/02/19 15:50:20 by astefane         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
+#include <unistd.h>
 
 void	ulstr(char *str)
 {
-	int	i;
+	int		i;
+	char	c;
 
 	i = 0;
-	while (str[i] != '\0')
+	while (str[i])
 	{
-		if (str[i] >= 'A' && str[i] <= 'Z')
-			ft_putchar(str[i] + 32);
-		else if (str[i] >= 'a' && str[i] <= 'z')
-			ft_putchar(str[i] - 32);
+		if (str[i] >= 'a' && str[i] <= 'z')
+		{
+			c = str[i] - 32;
+			write(1, &c, 1);
+			i++;
+		}
+		else if (str[i] >= 'A' && str[i] <= 'Z')
+		{
+			c = str[i] + 32;
+			write(1, &c, 1);
+			i++;
+		}
 		else
-			ft_putchar(str[i]);
-		i++;
+		{
+			write(1, &str[i], 1);
+			i++;
+		}
 	}
 }
 

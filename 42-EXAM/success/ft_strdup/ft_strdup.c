@@ -1,26 +1,39 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: astefane <astefane@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/03 16:18:34 by astefane          #+#    #+#             */
+/*   Updated: 2025/02/03 16:24:33 by astefane         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
-#include <stdio.h>
+#include <string.h>
 
 int	ft_strlen(char *str)
 {
 	int	i;
 
-	i = 0;
+	i  = 0;
 	while (str[i])
 		i++;
 	return (i);
 }
-char    *ft_strdup(char *src)
+
+char	*ft_strdup(char	*src)
 {
-	int		i;
 	int		len;
+	int		i;
 	char	*result;
 
-	i = 0;
 	len = ft_strlen(src);
-	result = (char *)malloc(sizeof(char) * (len + 1));
+	i = 0;
+	result = (char *)malloc(len + 1);
 	if (!result)
-		return (NULL);
+		return (0);
 	while (src[i])
 	{
 		result[i] = src[i];
@@ -29,10 +42,3 @@ char    *ft_strdup(char *src)
 	result[i] = '\0';
 	return (result);
 }
-/*
-int	main(void)
-{
-	char *s1 = {"HOLAQUETALHOLAQUETALHOLAQUETALHOLAQUETALHOLAQUETALHOLAQUETALHO                                                                                                                                                                                                                                                                                                LAQUETALHOLAQUETALHOLAQUETALHOLAQUETALHOLAQUETALHOLAQUETALHOLAQUETALHOLAQUETALHOLAQUETALHOLAQUETALHOLAQUETALHOLAQUETALHOLAQUETALHOLAQUETALHOLAQUETALHOLAQUETALHOLAQUETALHOLAQUETALHOLAQUETALHOLAQUETALHOLAQUETALHOLAQUETALHOLAQUETALHOLAQUETALHOLAQUETALHOLAQUETALHOLAQUETALHOLAQUETALHOLAQUETALHOLAQUETALHOLAQUETALHOLAQUETALHOLAQUETALHOLAQUETALHOLAQUETAL"};
-	char *s2 = ft_strdup(s1);
-	printf("esta es la string dupeada %s\n", s2);
-}*/

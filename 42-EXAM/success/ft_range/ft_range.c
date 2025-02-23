@@ -1,29 +1,49 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_range.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: astefane <astefane@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/21 17:35:27 by astefane          #+#    #+#             */
+/*   Updated: 2025/02/21 17:39:11 by astefane         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 
-int	ft_sing(int n)
+int	ft_abs(int n)
 {
 	if (n < 0)
 		return (-n);
 	return (n);
 }
+
 int	*ft_range(int start, int end)
 {
 	int	*result;
-	int	size;
 	int	i;
+	int	len;
 
 	i = 0;
-	size = ft_sing(start - end) + 1;
-	result = (int *)malloc(sizeof(int) * size);
+	len = ft_abs(end - start) + 1;
+	result = (int *)malloc(sizeof(int) * len);
 	if (!result)
 		return (NULL);
-	while (i < size)
+	while (i < len)
 	{
-		if (start <= end)
-			result[i] = start + i;
+		if (start < end)
+		{
+			result[i] = start;
+			start++;
+			i++;
+		}
 		else
-			result[i] = start - i;
-		i++;
+		{
+			result[i] = start;
+			start--;
+			i++;
+		}
 	}
 	return (result);
 }

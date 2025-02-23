@@ -1,85 +1,90 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   add_prime_sum.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: astefane <astefane@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/23 09:29:40 by astefane          #+#    #+#             */
+/*   Updated: 2025/02/23 09:55:42 by astefane         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 
-unsigned int get_number(char *str)
+int	ft_atoi(char *str)
 {
-	int	i;
-	unsigned	int	num;
+	int	num;
 
-	i = 0;
 	num = 0;
-	if (*str == '-')
-		return (num);
-	while (str[i])
+	while (*str >= '0' && *str <= '9')
 	{
-		if (str[i] < '0' || str[i] > '9')
-			return (-1);
-		num = num * 10 + (str[i] - '0');
-		i++;
+		num = num * 10 + (*str - '0');
+		str++;
 	}
 	return (num);
 }
 
-unsigned int is_prime(unsigned int n)
+int	is_prime(int num)
 {
-	unsigned int i;
+	int	i;
 
 	i = 2;
-	if (n < 2)
+	if (num < 2)
 		return (0);
-	while (i * i <= n)
+	while (i * i <= num)
 	{
-		if (n % i == 0)
+		if (num % i == 0)
 			return (0);
 		i++;
 	}
 	return (1);
 }
 
-int add_prime_sum(int n)
+void	ft_putnbr(int n)
 {
-	unsigned int sum;
-	unsigned int i;
+	char	c;
 
-	sum = 0;
-	i = 2;
-	while (i <= n)
-	{
-		if (is_prime(i))
-			sum += i;
-		i++;
-	}
-	return (sum);
-}
-
-void	ft_putnbr(unsigned int n)
-{
-	char c;
 	if (n > 9)
 		ft_putnbr(n / 10);
 	c = (n % 10) + '0';
 	write(1, &c, 1);
 }
 
+void	add_prime_sum(char *str)
+{
+	int	num;
+	int	sum;
+	int	i;
+
+	num = ft_atoi(str);
+	sum = 0;
+	i = 2;
+	if (num <= 0)
+	{
+		write(1, "0", 1);
+		return ;
+	}
+	while (i <= num)
+	{
+		if (is_prime(i))
+			sum += i;
+		i++;
+	}
+	ft_putnbr(i);
+}
+
 int	main(int argc, char **argv)
 {
-	unsigned int num;
-
-	num = 0;
-	if (argc > 2)
+	if (argc == 2)
 	{
-		write(1, "0\n", 2);
-		return (0);
-	}
-	if (argc == 1)
-	{
-		write(1, "0\n", 2);
-		return (0);
+		add_prime_sum(argv[1]);
+		write(1, "\n", 1);
 	}
 	else
 	{
-		num = get_number(argv[1]);
-		ft_putnbr(add_prime_sum(num));
+		write(1, "0\n", 2);
+		return (0);
 	}
-	write(1, "\n", 1);
 	return (0);
 }
